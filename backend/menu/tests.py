@@ -42,7 +42,6 @@ class TestMenuApiView(APITestCase):
         request = factory.get(url)
         response = view(request)
         response_result = dict(response.data.items()).get('results')
-        self.assertEqual(serializer.get_dishes_number, 0)
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(response_result, serializer.data)  # Empty List, Menu without dish
 

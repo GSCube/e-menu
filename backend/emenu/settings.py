@@ -100,7 +100,7 @@ DATABASES = {
         'USER': 'e_menu',
         'PASSWORD': 'qweasdzxc',
         'HOST': '138.68.85.131',
-        'PORT': '5432'
+        'PORT': '5432',
     }
 }
 

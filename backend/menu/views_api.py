@@ -1,19 +1,19 @@
-from rest_framework import mixins, generics, status
-from rest_framework.views import APIView
-from rest_framework.response import Response
-
+from emenu.base_views_api import ListApiView
+from emenu.base_paginators import BasePaginator
 from menu.models import Menu
-from menu.paginators import MenuPaginator
 from menu.serializers import MenuSerializer, MenuSerializerWithDish
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
-class MenuListApiView(mixins.ListModelMixin, generics.GenericAPIView):
+class MenuListApiView(ListApiView):
     """
     Widok generyczny API zwracający listę obiektów, obsługiwana metoda GET
     """
 
     serializer_class = MenuSerializer
-    pagination_class = MenuPaginator
+    pagination_class = BasePaginator
 
     def get_queryset(self):
         # not empty menu card

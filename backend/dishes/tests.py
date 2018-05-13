@@ -3,7 +3,7 @@ from django.urls import reverse
 from rest_framework.test import APITestCase, APIRequestFactory
 
 from dishes.models import Dish
-from dishes.views_api import DishDetailApiViwe
+from dishes.views_api import DishDetailApiViwe, DishesListApiView
 from menu.models import Menu
 
 
@@ -36,3 +36,19 @@ class TestDishDetailApiView(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('results', response_data)
         self.assertEqual(dish.id, response_data.get('results').get('id'))
+
+
+class TestDishesListlApiView(APITestCase):
+
+    def test_dish_detail_view(self):
+        menu = Menu.objects.create(title='Test Dish')
+        dish_1 = Dish.objects.create(title='Test 1', price=2.20, menu=menu)
+        dish_2 = Dish.objects.create(title='Test 2', price=3.20, menu=menu)
+        factory = APIRequestFactory(pk=menu.pk)
+        view = DishesListApiView.as_view()
+        request = factory.get(reverse('dishes:api-dishes-list', args=(menu.pk,)))
+        response = view(request, pk=menu.id)
+        response_data = response.data
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('results', response_data)
+        self.assertEqual(len(response_data.get('results')), 2)

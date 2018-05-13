@@ -1,0 +1,29 @@
+# ogolne
+.idea
+*.log
+env
+venv
+*.pyc
+*.pyo
+*.db
+.coverage
+# local_settings.py
+/static
+
+
+# systemowe
+.directory
+.DS_Store
+
+# backend
+backend/public/media/*
+!backend/public/media/_empty_
+backend/public/private/*
+!backend/public/private/_empty_
+backend/logs/*
+!backend/logs/_empty_
+
+# frontend
+frontend/node_modules
+frontend/_build
+/backend/venv/

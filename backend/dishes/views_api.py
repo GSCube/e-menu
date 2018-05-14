@@ -22,7 +22,7 @@ class DishDetailApiViwe(APIView):
 
 class DishesListApiView(APIView):
     """
-    Widok generyczny API zwracający listę obiektów, obsługiwana metoda GET
+    Menu Dishes List View
     """
 
     def get(self, request, pk):

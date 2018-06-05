@@ -9,6 +9,7 @@ venv
 .coverage
 # local_settings.py
 /static
+.env
 
 
 # systemowe

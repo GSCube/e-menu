@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'django.contrib.staticfiles',
     'debug_toolbar',
+    'corsheaders',
 ]
 
 PROJECT_APPS = [
@@ -57,6 +58,7 @@ INTERNAL_IPS = ['127.0.0.1']
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -134,8 +136,11 @@ USE_L10N = True
 USE_TZ = True
 
 STATICFILES_DIRS = (
-    os.path.join(FILE_SERVING_ROOT, 'static/'),
+    os.path.join(os.path.join(BASE_DIR, 'frontend'), 'build', 'static'),
 )
+
+REACT_APP = os.path.join(os.path.join(BASE_DIR, 'frontend'))
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/

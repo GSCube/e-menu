@@ -19,9 +19,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic.base import TemplateView
-
+from emenu.views import ReactAppView
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='menu/home.html'), name='home'),
+    # path('', TemplateView.as_view(template_name='menu/home.html'), name='home'),
+    path('', ReactAppView.as_view(), name='home'),
     path('admin/', admin.site.urls),
     path('api/menu/', include('menu.urls', namespace='menu')),
     path('api/dish/', include('dishes.urls', namespace='dishes')),

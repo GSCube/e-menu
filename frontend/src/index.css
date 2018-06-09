@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.table-container {
+  margin: 40px auto;
+  max-width: 600px;
+}
+
+.back {
+  cursor: pointer;
+}
+
+.back:hover {
+  color: green;
+  font-weight: bold;
+}

@@ -20,9 +20,12 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic.base import TemplateView
 
+from emenu.views_appi import MenuAndDishesListApiView
+
 urlpatterns = [
     path('', TemplateView.as_view(template_name='menu/home.html'), name='home'),
     path('admin/', admin.site.urls),
+    path('api/get_menues_and_dishes/', MenuAndDishesListApiView.as_view(), name='get_all_data'),
     path('api/menu/', include('menu.urls', namespace='menu')),
     path('api/dish/', include('dishes.urls', namespace='dishes')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

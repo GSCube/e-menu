@@ -1,8 +1,6 @@
 from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField
 from rest_framework.fields import SerializerMethodField
-
 from menu.models import Menu
-from dishes.serializers import DishSerializer
 
 
 class MenuSerializer(ModelSerializer):
@@ -27,16 +25,3 @@ class MenuSerializerWithDish(ModelSerializer):
     class Meta:
         model = Menu
         fields = ['id', 'title', 'description', 'created', 'dishes']
-
-
-class MenuAndDishSerializer(ModelSerializer):
-    """
-    Menu model's serializer
-    """
-
-    dishes = DishSerializer(many=True)
-
-    class Meta:
-        model = Menu
-        fields = '__all__'
-

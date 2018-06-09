@@ -8,25 +8,25 @@ class App extends Component {
     super(props);
     this.state = {
       details: false,
-      detailsPerson: [],
-      personName:[],
-      persons: []
+      detailsdish: [],
+      dishName: [],
+      dishes: []
     };
     this.showDetails = this.showDetails.bind(this);
     this.hideDetails = this.hideDetails.bind(this);
   }
   componentDidMount() {
-    axios.get(`https://jsonplaceholder.typicode.com/users`).then(res => {
-      const persons = res.data;
-      this.setState({persons});
+    axios.get(`/api/get_menues_and_dishes`).then(res => {
+      const dishes = res.data;
+      this.setState({dishes});
     })
   }
-  showDetails(personId, personName) {
-    let person = this.state.persons.find(person => person.id === personId);
-    let detailsPerson = [person.address];
+  showDetails(dishId, dishName) {
+    let dish = this.state.dishes.find(dish => dish.id === dishId);
+    let detailsdish = dish.dishes;
     this.setState({
-      personName,
-      detailsPerson,
+      dishName,
+      detailsdish,
       details: true,
     });
   }
@@ -44,27 +44,17 @@ class App extends Component {
         accessor: 'id',
         Cell: (props) => {
             return(
-                <div className="back" onClick={() => this.showDetails(props.original.id, props.original.name)}>
+                <div className="back" onClick={() => this.showDetails(props.original.id, props.original.title)}>
                     {props.value}
                 </div>
             )
         }
       }, {
-        Header: 'Name',
-        accessor: 'name',
+        Header: 'Title',
+        accessor: 'title',
         Cell: (props) => {
             return(
-                <div className="back" onClick={() => this.showDetails(props.original.id, props.original.name)}>
-                    {props.value}
-                </div>
-            )
-        }
-      }, {
-        Header: 'Username',
-        accessor: 'username',
-        Cell: (props) => {
-            return(
-                <div className="back" onClick={() => this.showDetails(props.original.id, props.original.name)}>
+                <div className="back" onClick={() => this.showDetails(props.original.id, props.original.title)}>
                     {props.value}
                 </div>
             )
@@ -74,17 +64,11 @@ class App extends Component {
 
     const detailsColumns = [
       {
-        Header: 'City',
-        accessor: 'city',
+        Header: 'Title',
+        accessor: 'title',
       }, {
-        Header: 'Street',
-        accessor: 'street'
-      }, {
-        Header: 'Zip code',
-        accessor: 'zipcode'
-      }, {
-        Header: 'Suite',
-        accessor: 'suite'
+        Header: 'Price',
+        accessor: 'price'
       }
     ]
     return (<div className="App">
@@ -92,8 +76,8 @@ class App extends Component {
         {
           this.state.details
             ? <div>
-                <h1>{this.state.personName}</h1>
-                <ReactTable columns={detailsColumns} data={this.state.detailsPerson} defaultPageSize={4} defaultSorted={[{
+                <h1>{this.state.dishName}</h1>
+                <ReactTable columns={detailsColumns} data={this.state.detailsdish} defaultPageSize={4} defaultSorted={[{
                       id: "id"
                     }
                   ]}/>
@@ -102,7 +86,7 @@ class App extends Component {
 
             : <div>
                 <h1>Menu</h1>
-                <ReactTable columns={mainColumns} data={this.state.persons} defaultPageSize={4} defaultSorted={[{
+                <ReactTable columns={mainColumns} data={this.state.dishes} defaultPageSize={4} defaultSorted={[{
                         id: "id"
                       }
                     ]}/>

@@ -1,5 +1,5 @@
 # coverage==4.5.1
-Django==2.0.5
+Django==2.0.8
 psycopg2==2.7.3.2
 django-debug-toolbar==1.9.1
 django-filter==1.1.0
